@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package file_transfer;
+
+service FileService {
+    rpc UploadFile (stream FileChunk) returns (UploadResponse);
+    rpc DownloadFile (FileRequest) returns (stream FileChunk);
+    rpc ListFiles (EmptyRequest) returns (FileListResponse);
+}
+
+message FileRequest {
+    string filename = 1;
+}
+
+message FileChunk {
+    string filename = 1;
+    bytes content = 2;
+}
+
+message UploadResponse {
+    string message = 1;
+}
+
+message EmptyRequest {}
+
+message FileListResponse {
+    repeated string filenames = 1;
+}

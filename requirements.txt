@@ -1,0 +1,11 @@
+fastapi
+grpcio
+grpcio-tools
+protobuf
+uvicorn
+aiofiles
+python-multipart
+pytest
+pytest-mock
+httpx
+pytest-asyncio

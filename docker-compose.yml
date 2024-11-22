@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  grpc-server:
+    build: .
+    command: python grpc_server.py
+    volumes:
+      - ./files:/app/uploaded_files
+    ports:
+      - "50051:50051"
+
+  fastapi-client:
+    build: .
+    command: uvicorn fastapi_client:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - grpc-server
+    environment:
+      - GRPC_SERVER_ADDRESS=grpc-server:50051
+
